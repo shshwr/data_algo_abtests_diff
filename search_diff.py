@@ -57,24 +57,35 @@ for line in topQueryFile:
 		count=count+1;
 		if(count>2):
 			break
+	newshortTitle=""
+	count_new=0	
+	for obj in newSearchDealList['records']:
+		if(count_new==0):
+			newshortTitle = obj['dealgroupshorttitleindexed']
+		else:
+			newshortTitle = newshortTitle+";"+obj['dealgroupshorttitleindexed']
+		count_new=count_new+1;
+		if(count_new>2):
+			break
+
         #print  oldSearchDealListJson
        # print keyword
        # print keyword + "," + str(newHitsNum) + "," + str(newHitsNum - oldHitsNum)
 	
         if oldHitsNum == 0 and newHitsNum==0:
-            searchDealGroupFile.write(keyword + "\t0"+"\t"+oldshortTitle + "\n")
+            searchDealGroupFile.write(keyword + "\t0"+"\t"+oldshortTitle +"\t"+newshortTitle + "\n")
 	    print keyword
 	if oldHitsNum == 0 and newHitsNum<>0:
-	    searchDealGroupFile.write(keyword + "\t1" +"\t"+oldshortTitle +  "\n")
+	    searchDealGroupFile.write(keyword + "\t1" +"\t"+oldshortTitle +"\t"+newshortTitle +  "\n")
 	if oldHitsNum <> 0 and newHitsNum==0:
-            searchDealGroupFile.write(keyword + "\t2" +"\t"+oldshortTitle +  "\n")
+            searchDealGroupFile.write(keyword + "\t2" +"\t"+oldshortTitle +"\t"+newshortTitle +  "\n")
 	if oldHitsNum <> 0 and newHitsNum>oldHitsNum:
-            searchDealGroupFile.write(keyword + "\t3" + "\t"+oldshortTitle + "\n")
+            searchDealGroupFile.write(keyword + "\t3" + "\t"+oldshortTitle +"\t"+newshortTitle + "\n")
 	if oldHitsNum > newHitsNum and newHitsNum<>0:
-            searchDealGroupFile.write(keyword + "\t4" +"\t"+oldshortTitle +  "\n")
+            searchDealGroupFile.write(keyword + "\t4" +"\t"+oldshortTitle +"\t"+newshortTitle +  "\n")
 	    print keyword
 	if oldHitsNum == newHitsNum and newHitsNum<>0:
-            searchDealGroupFile.write(keyword + "\t5" + "\t"+oldshortTitle + "\n")
+            searchDealGroupFile.write(keyword + "\t5" + "\t"+oldshortTitle +"\t"+newshortTitle + "\n")
 
 searchDealGroupFile.close()
 
